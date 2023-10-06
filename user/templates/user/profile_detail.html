@@ -1,0 +1,36 @@
+{% extends parent_template|default:"user/base_user.html" %}
+
+{% block title %}
+{{ block.super }} -
+{{ profile.user.get_username }}'s Profile
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if user.pk == profile.user.pk %}
+    <div class="offset-by-two five columns">
+            {% else %}
+        <div class="offset-by-two eight columns">
+
+        </div>
+            {% endif%}
+    
+            <h2>About {{ profile.user.get_username }}</h2>
+            {{ profile.about|default:"No Profile"|linebreaks }}
+            {{ profile.email|default:"No Email"|linebreaks }}
+            {{ profile.job|default:"No Job"|linebreaks }}
+            {{ profile.phone_number|default:"No Phone"|linebreaks }}
+            {{ profile.picture|default:"No picture"|linebreaks }}
+    </div><!-- columns -->
+
+        {% if user.pk == profile.user.pk %}
+        <div class="three columns">
+            <ul class="task-list">
+                <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                <li><a href="{% url 'disable' %}">Disable Account</a></li>
+                <li><a href="{{ profile.get_update_url }}">Edit Your Profile</a></li>
+            </ul>
+        </div>
+    {% endif%}
+</div><!-- row -->
+{% endblock %}

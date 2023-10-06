@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+{% block title %}
+<title>Startup Organizer</title>
+{% endblock %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+{% block head %}{% endblock %}
+{% load static %}   
+<link rel="stylesheet" type="text/css" href="{% static 'site/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'site/normalize.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'site/skeleton.css' %}">
+
+</head>
+
+<body>
+    
+    {% load flatpages %}
+    {% get_flatpages as flatpages %}
+    
+
+    <nav>
+        <div class="status row">
+            <div class="offset-by-eight four columns">
+                <ul class="inline">
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}?next={{ request.path }}">Log Out</a></li>
+                    <li><a href="{% url 'password_change' %}">Change password</a></li>
+                    <li><a href="{% url 'disable' %}">Disable Account</a></li>
+                    <li><a href="{% url 'profile' %}">View Profile</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+            {% for page in flatpages %}
+            <li><a href="{{ page.get_absolute_url }}">{{ page.title }} flapage</a></li>
+            {% endfor %}
+            <li><a href="{% url 'blog_post_list' %}">Blog</a></li>
+            <li><a href="{% url 'organizer_startup_list' %}">Startups</a></li>
+            <li><a href="{% url 'organizer_tag_list' %}">Tags</a></li>
+            <li><a href="{% url 'about_site' %}">About - html page</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+ 
+    </nav>
+
+
+        <div><!-- container -->
+            <header>
+                <img src="{% static "site/logo.png" %}" alt="Site Logo">
+                <h1>Startup Organizer</h1>
+                
+            </header>
+
+            <main>
+                {% block content %}
+                This is default content!
+                {% endblock %}
+            </main>
+        </div><!-- container -->
+
+<footer>
+    <p>&copy; 2015<a href="https://AndrewsForge.com/">Andrew Pinkham</a></p>
+    <p>Created for<a href="https://Django-Unleashed.com/">Django Unleashed</a></p>
+</footer>
+
+{% if messages %}
+<div>
+    <div>
+        <ul>
+            {% for message in messages %}
+            {% if message.tags %}
+                <li class="{{ message.tags }}">
+            {% else %}
+                <li>
+            {% endif %}
+            {{ message }}
+               </li>
+                {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+</body>
+
+</html>

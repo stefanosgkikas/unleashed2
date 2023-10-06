@@ -1,0 +1,18 @@
+{% extends parent_template|default:"user/base_user.html" %}
+
+{% block title %}
+{{ block.super }} - Login
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="offset-by-two five columns">
+    {% include "registration/login_form.html" %}
+  </div>
+</div>
+<div class="three columns">
+   <ul class="task-list">
+     <li><a href="{% url 'password_reset' %}">Forgotten your password? Reset password</a></li>
+   </ul>
+</div>
+
+{% endblock %}

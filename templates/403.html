@@ -1,0 +1,14 @@
+{% extends parent_template|default:"base.html" %}
+
+{% block title %}
+ Permission denied
+{% endblock %}
+
+{% block content %}
+<div class="row">
+ <div class="offset-by-two eight columns">
+     <h1>Permission denied</h1>
+     <p>The path {{ request.path }} has no permission on this site!</p>
+ </div>
+</div>
+{% endblock %}

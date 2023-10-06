@@ -1,0 +1,9 @@
+1 {% extends parent_template|default:"base.html" %}
+2
+3 {% block title %}
+4 {{ block.super }} - Logged Out
+5 {% endblock %}
+6
+7 {% block content %}
+8 <p>You've successfully logged out.</p>
+9 {% endblock %}

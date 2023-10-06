@@ -1,0 +1,14 @@
+{% extends parent_template|default:"base.html" %}
+
+{% block title %}
+ Internal Server Error
+{% endblock %}
+
+{% block content %}
+<div class="row">
+ <div class="offset-by-two eight columns">
+ <h1>Internal Server Error</h1>
+ <p>The path {{ request.path }} has caught en error on this site!</p>
+ </div>
+</div>
+{% endblock %}
